@@ -1,0 +1,789 @@
+data.aws_iam_policy_document.eks-assume-role: Reading...
+data.aws_route53_zone.personal: Reading...
+data.aws_availability_zones.available: Reading...
+data.aws_iam_policy_document.eks-assume-role: Read complete after 0s [id=3552664922]
+data.aws_availability_zones.available: Read complete after 1s [id=eu-west-2]
+data.aws_route53_zone.personal: Read complete after 1s [id=Z1SW82V1AFZR3B]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_cloudfront_distribution.invo-cloudfront will be created
+  + resource "aws_cloudfront_distribution" "invo-cloudfront" {
+      + arn                             = (known after apply)
+      + caller_reference                = (known after apply)
+      + continuous_deployment_policy_id = (known after apply)
+      + domain_name                     = (known after apply)
+      + enabled                         = true
+      + etag                            = (known after apply)
+      + hosted_zone_id                  = (known after apply)
+      + http_version                    = "http2"
+      + id                              = (known after apply)
+      + in_progress_validation_batches  = (known after apply)
+      + is_ipv6_enabled                 = false
+      + last_modified_time              = (known after apply)
+      + price_class                     = "PriceClass_All"
+      + retain_on_delete                = false
+      + staging                         = false
+      + status                          = (known after apply)
+      + tags_all                        = (known after apply)
+      + trusted_key_groups              = (known after apply)
+      + trusted_signers                 = (known after apply)
+      + wait_for_deployment             = true
+
+      + default_cache_behavior {
+          + allowed_methods        = [
+              + "GET",
+              + "HEAD",
+            ]
+          + cached_methods         = [
+              + "GET",
+            ]
+          + compress               = false
+          + default_ttl            = (known after apply)
+          + max_ttl                = (known after apply)
+          + min_ttl                = 0
+          + target_origin_id       = "eks-cluster-invo"
+          + trusted_key_groups     = (known after apply)
+          + trusted_signers        = (known after apply)
+          + viewer_protocol_policy = "https-only"
+
+          + forwarded_values {
+              + headers                 = (known after apply)
+              + query_string            = false
+              + query_string_cache_keys = (known after apply)
+
+              + cookies {
+                  + forward           = "none"
+                  + whitelisted_names = (known after apply)
+                }
+            }
+        }
+
+      + origin {
+          + connection_attempts = 3
+          + connection_timeout  = 10
+          + domain_name         = (known after apply)
+          + origin_id           = "eks-cluster-invo"
+        }
+
+      + restrictions {
+          + geo_restriction {
+              + locations        = [
+                  + "DE",
+                  + "GB",
+                  + "IN",
+                  + "JP",
+                  + "US",
+                ]
+              + restriction_type = "whitelist"
+            }
+        }
+
+      + viewer_certificate {
+          + cloudfront_default_certificate = true
+          + minimum_protocol_version       = "TLSv1"
+        }
+    }
+
+  # aws_eip.nat[0] will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags_all             = (known after apply)
+      + vpc                  = (known after apply)
+    }
+
+  # aws_eip.nat[1] will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags_all             = (known after apply)
+      + vpc                  = (known after apply)
+    }
+
+  # aws_eip.nat[2] will be created
+  + resource "aws_eip" "nat" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags_all             = (known after apply)
+      + vpc                  = (known after apply)
+    }
+
+  # aws_eks_cluster.cluster will be created
+  + resource "aws_eks_cluster" "cluster" {
+      + arn                   = (known after apply)
+      + certificate_authority = (known after apply)
+      + cluster_id            = (known after apply)
+      + created_at            = (known after apply)
+      + endpoint              = (known after apply)
+      + id                    = (known after apply)
+      + identity              = (known after apply)
+      + name                  = "eks-cluster-invo"
+      + platform_version      = (known after apply)
+      + role_arn              = (known after apply)
+      + status                = (known after apply)
+      + tags_all              = (known after apply)
+      + version               = (known after apply)
+
+      + vpc_config {
+          + cluster_security_group_id = (known after apply)
+          + endpoint_private_access   = false
+          + endpoint_public_access    = true
+          + public_access_cidrs       = (known after apply)
+          + subnet_ids                = (known after apply)
+          + vpc_id                    = (known after apply)
+        }
+    }
+
+  # aws_eks_fargate_profile.fargate-profile will be created
+  + resource "aws_eks_fargate_profile" "fargate-profile" {
+      + arn                    = (known after apply)
+      + cluster_name           = "eks-cluster-invo"
+      + fargate_profile_name   = "invo"
+      + id                     = (known after apply)
+      + pod_execution_role_arn = (known after apply)
+      + status                 = (known after apply)
+      + subnet_ids             = (known after apply)
+      + tags_all               = (known after apply)
+
+      + selector {
+          + namespace = "invo"
+        }
+    }
+
+  # aws_iam_role.eks-cluster-role will be created
+  + resource "aws_iam_role" "eks-cluster-role" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "eks.amazonaws.com"
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "invo-eks-cluster-role"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = (known after apply)
+      + unique_id             = (known after apply)
+    }
+
+  # aws_iam_role.eks-fargate-pod-role will be created
+  + resource "aws_iam_role" "eks-fargate-pod-role" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "eks-fargate-pods.amazonaws.com"
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "eks-fargate-pod-role"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = (known after apply)
+      + unique_id             = (known after apply)
+    }
+
+  # aws_iam_role_policy_attachment.eks-cluster-role-AmazonEKSClusterPolicy will be created
+  + resource "aws_iam_role_policy_attachment" "eks-cluster-role-AmazonEKSClusterPolicy" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+      + role       = "invo-eks-cluster-role"
+    }
+
+  # aws_iam_role_policy_attachment.eks-fargate-pod-role-AmazonEKSFargatePodExecutionRolePolicy will be created
+  + resource "aws_iam_role_policy_attachment" "eks-fargate-pod-role-AmazonEKSFargatePodExecutionRolePolicy" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"
+      + role       = "eks-fargate-pod-role"
+    }
+
+  # aws_internet_gateway.igw will be created
+  + resource "aws_internet_gateway" "igw" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags_all = (known after apply)
+      + vpc_id   = (known after apply)
+    }
+
+  # aws_lb.application will be created
+  + resource "aws_lb" "application" {
+      + arn                                                          = (known after apply)
+      + arn_suffix                                                   = (known after apply)
+      + desync_mitigation_mode                                       = "defensive"
+      + dns_name                                                     = (known after apply)
+      + drop_invalid_header_fields                                   = false
+      + enable_deletion_protection                                   = false
+      + enable_http2                                                 = true
+      + enable_tls_version_and_cipher_suite_headers                  = false
+      + enable_waf_fail_open                                         = false
+      + enable_xff_client_port                                       = false
+      + enforce_security_group_inbound_rules_on_private_link_traffic = (known after apply)
+      + id                                                           = (known after apply)
+      + idle_timeout                                                 = 60
+      + internal                                                     = false
+      + ip_address_type                                              = (known after apply)
+      + load_balancer_type                                           = "application"
+      + name                                                         = "invo-lb-prod"
+      + name_prefix                                                  = (known after apply)
+      + preserve_host_header                                         = false
+      + security_groups                                              = (known after apply)
+      + subnets                                                      = (known after apply)
+      + tags_all                                                     = (known after apply)
+      + vpc_id                                                       = (known after apply)
+      + xff_header_processing_mode                                   = "append"
+      + zone_id                                                      = (known after apply)
+    }
+
+  # aws_nat_gateway.ngw[0] will be created
+  + resource "aws_nat_gateway" "ngw" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags_all                           = (known after apply)
+    }
+
+  # aws_nat_gateway.ngw[1] will be created
+  + resource "aws_nat_gateway" "ngw" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags_all                           = (known after apply)
+    }
+
+  # aws_nat_gateway.ngw[2] will be created
+  + resource "aws_nat_gateway" "ngw" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags_all                           = (known after apply)
+    }
+
+  # aws_rds_cluster.invo-db will be created
+  + resource "aws_rds_cluster" "invo-db" {
+      + allocated_storage               = (known after apply)
+      + apply_immediately               = (known after apply)
+      + arn                             = (known after apply)
+      + availability_zones              = (known after apply)
+      + backup_retention_period         = (known after apply)
+      + cluster_identifier              = "invo-db"
+      + cluster_identifier_prefix       = (known after apply)
+      + cluster_members                 = (known after apply)
+      + cluster_resource_id             = (known after apply)
+      + copy_tags_to_snapshot           = false
+      + database_name                   = "invo-prod"
+      + db_cluster_parameter_group_name = (known after apply)
+      + db_subnet_group_name            = (known after apply)
+      + db_system_id                    = (known after apply)
+      + delete_automated_backups        = true
+      + enable_global_write_forwarding  = false
+      + enable_http_endpoint            = false
+      + endpoint                        = (known after apply)
+      + engine                          = "aurora-postgresql"
+      + engine_mode                     = "provisioned"
+      + engine_version                  = "13.6"
+      + engine_version_actual           = (known after apply)
+      + hosted_zone_id                  = (known after apply)
+      + iam_roles                       = (known after apply)
+      + id                              = (known after apply)
+      + kms_key_id                      = (known after apply)
+      + master_password                 = (sensitive value)
+      + master_user_secret              = (known after apply)
+      + master_user_secret_kms_key_id   = (known after apply)
+      + master_username                 = "admin"
+      + network_type                    = (known after apply)
+      + port                            = (known after apply)
+      + preferred_backup_window         = (known after apply)
+      + preferred_maintenance_window    = (known after apply)
+      + reader_endpoint                 = (known after apply)
+      + skip_final_snapshot             = false
+      + storage_encrypted               = true
+      + storage_type                    = (known after apply)
+      + tags_all                        = (known after apply)
+      + vpc_security_group_ids          = (known after apply)
+
+      + serverlessv2_scaling_configuration {
+          + max_capacity = 3
+          + min_capacity = 1
+        }
+    }
+
+  # aws_rds_cluster_instance.invo will be created
+  + resource "aws_rds_cluster_instance" "invo" {
+      + apply_immediately                     = (known after apply)
+      + arn                                   = (known after apply)
+      + auto_minor_version_upgrade            = true
+      + availability_zone                     = (known after apply)
+      + ca_cert_identifier                    = (known after apply)
+      + cluster_identifier                    = (known after apply)
+      + copy_tags_to_snapshot                 = false
+      + db_parameter_group_name               = (known after apply)
+      + db_subnet_group_name                  = (known after apply)
+      + dbi_resource_id                       = (known after apply)
+      + endpoint                              = (known after apply)
+      + engine                                = "aurora-postgresql"
+      + engine_version                        = "13.6"
+      + engine_version_actual                 = (known after apply)
+      + id                                    = (known after apply)
+      + identifier                            = (known after apply)
+      + identifier_prefix                     = (known after apply)
+      + instance_class                        = "db.serverless"
+      + kms_key_id                            = (known after apply)
+      + monitoring_interval                   = 0
+      + monitoring_role_arn                   = (known after apply)
+      + network_type                          = (known after apply)
+      + performance_insights_enabled          = (known after apply)
+      + performance_insights_kms_key_id       = (known after apply)
+      + performance_insights_retention_period = (known after apply)
+      + port                                  = (known after apply)
+      + preferred_backup_window               = (known after apply)
+      + preferred_maintenance_window          = (known after apply)
+      + promotion_tier                        = 0
+      + publicly_accessible                   = (known after apply)
+      + storage_encrypted                     = (known after apply)
+      + tags_all                              = (known after apply)
+      + writer                                = (known after apply)
+    }
+
+  # aws_route53_record.www will be created
+  + resource "aws_route53_record" "www" {
+      + allow_overwrite = (known after apply)
+      + fqdn            = (known after apply)
+      + id              = (known after apply)
+      + name            = "invo.hartnell.cc"
+      + type            = "A"
+      + zone_id         = "Z1SW82V1AFZR3B"
+
+      + alias {
+          + evaluate_target_health = true
+          + name                   = (known after apply)
+          + zone_id                = (known after apply)
+        }
+    }
+
+  # aws_route_table.private[0] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + carrier_gateway_id         = ""
+              + cidr_block                 = "0.0.0.0/0"
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + gateway_id                 = (known after apply)
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+      + tags_all         = (known after apply)
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table.private[1] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + carrier_gateway_id         = ""
+              + cidr_block                 = "0.0.0.0/0"
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + gateway_id                 = (known after apply)
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+      + tags_all         = (known after apply)
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table.private[2] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + carrier_gateway_id         = ""
+              + cidr_block                 = "0.0.0.0/0"
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + gateway_id                 = (known after apply)
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+      + tags_all         = (known after apply)
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table.public will be created
+  + resource "aws_route_table" "public" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + carrier_gateway_id         = ""
+              + cidr_block                 = "0.0.0.0/0"
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + gateway_id                 = (known after apply)
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+      + tags_all         = (known after apply)
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table_association.compute[0] will be created
+  + resource "aws_route_table_association" "compute" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.compute[1] will be created
+  + resource "aws_route_table_association" "compute" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.compute[2] will be created
+  + resource "aws_route_table_association" "compute" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.public[0] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.public[1] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_route_table_association.public[2] will be created
+  + resource "aws_route_table_association" "public" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_security_group.alb will be created
+  + resource "aws_security_group" "alb" {
+      + arn                    = (known after apply)
+      + description            = "Managed by Terraform"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + description      = ""
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+        ]
+      + name                   = "invo-alb-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags_all               = (known after apply)
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_subnet.compute[0] will be created
+  + resource "aws_subnet" "compute" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-2a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.1.3.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "kubernetes.io/cluster/eks-cluster-invo" = "shared"
+        }
+      + tags_all                                       = {
+          + "kubernetes.io/cluster/eks-cluster-invo" = "shared"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.compute[1] will be created
+  + resource "aws_subnet" "compute" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-2b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.1.4.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "kubernetes.io/cluster/eks-cluster-invo" = "shared"
+        }
+      + tags_all                                       = {
+          + "kubernetes.io/cluster/eks-cluster-invo" = "shared"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.compute[2] will be created
+  + resource "aws_subnet" "compute" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-2c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.1.5.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "kubernetes.io/cluster/eks-cluster-invo" = "shared"
+        }
+      + tags_all                                       = {
+          + "kubernetes.io/cluster/eks-cluster-invo" = "shared"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.public[0] will be created
+  + resource "aws_subnet" "public" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-2a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.1.0.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags_all                                       = (known after apply)
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.public[1] will be created
+  + resource "aws_subnet" "public" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-2b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.1.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags_all                                       = (known after apply)
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_subnet.public[2] will be created
+  + resource "aws_subnet" "public" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "eu-west-2c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.1.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags_all                                       = (known after apply)
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_vpc.invo_vpc will be created
+  + resource "aws_vpc" "invo_vpc" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.1.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = (known after apply)
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + tags_all                             = (known after apply)
+    }
+
+Plan: 36 to add, 0 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
