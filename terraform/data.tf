@@ -12,3 +12,8 @@ data "aws_iam_policy_document" "eks-assume-role" {
     actions = ["sts:AssumeRole"]
   }
 }
+
+data "aws_route53_zone" "personal" {
+  name         = "hartnell.cc"
+  private_zone = false
+}

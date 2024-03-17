@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "cluster" {
-  name     = "eks-cluster-invo"
+  name     = var.cluster_name
   role_arn = aws_iam_role.eks-cluster-role.arn
 
   vpc_config {

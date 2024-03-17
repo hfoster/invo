@@ -14,8 +14,8 @@ resource "aws_route_table_association" "compute" {
   route_table_id = aws_route_table.private.*.id[count.index]
 }
 
-resource "aws_route_table_association" "data" {
-  count          = local.num_azs
-  subnet_id      = aws_subnet.data.*.id[count.index]
-  route_table_id = aws_route_table.private.*.id[count.index]
-}
+# resource "aws_route_table_association" "data" {
+#   count          = local.num_azs
+#   subnet_id      = aws_subnet.data.*.id[count.index]
+#   route_table_id = aws_route_table.private.*.id[count.index]
+# }
