@@ -65,4 +65,3 @@ jobs:
               run: |
                 echo "terraform apply"
               working-directory: terraform
-        
