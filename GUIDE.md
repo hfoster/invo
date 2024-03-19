@@ -2,6 +2,7 @@
 
 ### 1. Infrastructure Build
 Run the "Infrastructure Build" workflow.
+Errors may be caused by the absence of a remote state file.
 
 ### 2. Docker Build
 Run the "Docker Build" workflow.
